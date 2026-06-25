@@ -1,16 +1,25 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react'; // <-- Imported to fix the plugin error
+
 export default defineConfig({
   plugins: [react()],
   server: {
-   // host: '0.0.0.0', 
     host: true,
-    //port: 3000,
-    port: 5173,
+    port: 3000, 
     strictPort: true,
     hmr: {
-      clientPort: 443, // Routes hot reload traffic through HTTPS proxy
+      clientPort: 443, 
     },
     watch: {
-      usePolling: true, // Forces file watching to work inside the container
+      usePolling: true, 
     },
+    // 👇 ADD THIS PROXY BLOCK HERE 👇
+    proxy: {
+      '/api': {
+        target: 'http://backend:8000', // Docker's internal container address
+        changeOrigin: true,
+        secure: false,
+      }
+    }
   },
 })
