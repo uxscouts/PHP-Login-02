@@ -23,3 +23,14 @@ export default defineConfig({
     }
   },
 })
+
+/*
+    proxy: {
+      // Any request starting with /api will be routed to your PHP container
+      '/api': {
+        target: 'http://localhost:8000', // Change 8000 to your PHP container's internal port
+        changeOrigin: true,
+        secure: false,
+      }
+    }
+*/

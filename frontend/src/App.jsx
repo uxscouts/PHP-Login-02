@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import UserList from './components/UserList';
+import Users from './components/Users';
 import './App.css'
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <p>Something</p>
-      <UserList/>
+      <Users/>
     </>
   )
 }
