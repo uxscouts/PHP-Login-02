@@ -8,6 +8,7 @@ function App() {
   return (
     <>
       <p>Something</p>
+      <UserList/>
     </>
   )
 }
