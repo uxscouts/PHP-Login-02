@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Users() {
+export default function Users_new() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,11 +11,26 @@ export default function Users() {
   const [formMessage, setFormMessage] = useState('');
 
   // Base API configuration from your working environment variables
-  const BASE_URL = import.meta.env.VITE_API_URL;
+  // this way does not work to get base URL
+ // const BASE_URL = import.meta.env.VITE_API_URL;
+
+
+
+        const getCodespacesBackendUrl_02 = () => {
+            const currentURL_02 = window.location.href;
+            if (currentURL_02.includes('github.dev') || currentUrl.includes('app.github.dev')) {
+                return currentURL_02.replace('-3000.', '-8001.').replace(/\/$/, '');
+            }
+            return 'http://localhost:8000';
+        }
+
+        const BASE_URL = getCodespacesBackendUrl_02();
+       
+
 
   // Function to fetch the user list
   const fetchUsers = () => {
-    fetch(`${BASE_URL}/api/users.php`)
+    fetch(`${BASE_URL}/backend/users.php`)
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         return res.json();

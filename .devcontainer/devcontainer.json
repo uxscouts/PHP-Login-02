@@ -1,5 +1,5 @@
 {
-  "name": "RPMS-06",
+  "name": "RPMS-07",
   "hostRequirements": {
     "cpus": 8,
     "memory": "16gb"
