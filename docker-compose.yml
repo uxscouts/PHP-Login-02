@@ -10,11 +10,8 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      # - 'db_data:/var/lib/mysql'
-      # - ./init-db:/docker-entrypoint-initdb.d
       - 'db_data:/var/lib/mysql'
-      # Mount the folder contents directly
-      - ./init-db:/docker-entrypoint-initdb.d:ro
+      - ./init-db:/docker-entrypoint-initdb.d
   backend:
     build: ./backend
     restart: always

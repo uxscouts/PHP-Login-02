@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Users3 from './components/Users3';
+import Users2 from './components/Users2';
 import './App.css'
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <>
       <p>Something</p>
       <Users3/>
+      <Users2/>
     </>
   )
 }

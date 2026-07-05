@@ -66,3 +66,17 @@ docker compose exec mysql mysql -u dev_user -p
 
 // Force to show database INSIDE container!! - Not native Codespaces MySQL
 docker-compose exec mysql mysql -u dev_user -pdev_password my_database -e "SHOW TABLES;"
+
+---------------------------
+
+// solve famous codespaces cache problem 
+// when you can't see your new databases
+
+# 1. Take everything down completely
+docker compose down -v
+
+# 2. Force prune all dead volumes hanging around in Codespaces memory
+docker volume prune -f
+
+# 3. Spin only the MySQL container up first to force the init scripts to fire
+docker compose up -d mysql

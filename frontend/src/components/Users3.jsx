@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Users() {
+export default function Users3() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
