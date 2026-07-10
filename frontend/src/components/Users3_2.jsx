@@ -1,22 +1,122 @@
-// 1. Capture the base server URL at the very top of your file (outside the component)
-const getBackendUrl = (path) => {
-  // Captures 'https://github.dev'
-  const baseUrl = `${window.location.protocol}//${window.location.host}`;
-  
-  // Appends your backend path to the root domain
-  return `${baseUrl}/${path.replace(/^\//, '')}`;
-};
+import React, { useState, useEffect } from 'react';
 
-// 2. Use it inside your React Component
-function YourComponent() {
-  useEffect(() => {
-    // This safely resolves to your Codespace root + backend path
-    const targetUrl = getBackendUrl('backend/file.php'); 
-    
-    fetch(targetUrl)
-      .then(res => res.json())
-      .then(data => console.log(data));
-  }, []);
+export default function Users3_2() {
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [formData, setFormData] = useState({ username: '', email: '' });
 
-  return <div>Your UI Here</div>;
+    // Clean, automated endpoint using your verified .env setup
+    const API_URL2 = `${import.meta.env.VITE_API_URL}/users3.php`;
+
+    // Fetch users function
+    const fetchUsers = () => {
+        fetch(API_URL2, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        })
+        .then((response) => {
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return response.json();
+        })
+        .then((data) => {
+            if (Array.isArray(data)) {
+                setUsers(data);
+            } else {
+                console.error("Expected array but received:", data);
+                setError("Invalid data format received from server.");
+            }
+            setLoading(false);
+        })
+        .catch((err) => {
+            console.error("Fetch error:", err);
+            setError(err.message);
+            setLoading(false);
+        });
+    };
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+    // Handle form submission to add a user
+    const handleAddUser = (e) => {
+        e.preventDefault();
+                 
+        fetch(API_URL2, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                // Clear form and refresh user list
+                setFormData({ username: '', email: '' });
+                fetchUsers();
+            } else {
+                alert("Error adding user: " + (data.message || 'Unknown error'));
+            }
+        })
+        .catch((err) => console.error("Error:", err));
+    };
+
+    if (loading) return <div style={{ padding: '20px' }}>Loading system users...</div>;
+    if (error) return <div style={{ color: 'red', padding: '20px' }}>Error: {error}</div>;
+
+    return (
+        <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
+            <h2>Database Users ({users.length})</h2>
+
+            {/* Add User Form */}
+            <form onSubmit={handleAddUser} style={{ marginBottom: '30px', padding: '15px', border: '1px solid #ccc', borderRadius: '5px', maxWidth: '400px' }}>
+                <h3>Add New User</h3>
+                <div style={{ marginBottom: '10px' }}>
+                    <label>Username: </label>
+                    <input 
+                        type="text" 
+                        value={formData.username} 
+                        onChange={(e) => setFormData({...formData, username: e.target.value})} 
+                        required 
+                    />
+                </div>
+                <div style={{ marginBottom: '10px' }}>
+                    <label>Email: </label>
+                    <input 
+                        type="email" 
+                        value={formData.email} 
+                        onChange={(e) => setFormData({...formData, email: e.target.value})} 
+                        required 
+                    />
+                </div>
+                <button type="submit">Add User</button>
+            </form>
+
+            {/* Users Table */}
+            {users.length === 0 ? (
+                <p>No users found in the database.</p>
+            ) : (
+                <table border="1" cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                    <thead>
+                        <tr style={{ backgroundColor: '#f2f2f2' }}>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Created At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.map((user) => (
+                            <tr key={user.id}>
+                                <td>{user.id}</td>
+                                <td>{user.username}</td>
+                                <td>{user.email}</td>
+                                <td>{user.created_at}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
+        </div>
+    );
 }

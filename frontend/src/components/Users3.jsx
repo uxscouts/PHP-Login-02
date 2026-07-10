@@ -8,15 +8,9 @@ export default function Users3() {
     // State for the new user form
     const [formData, setFormData] = useState({ username: '', email: '' });
 
-    const getCodespacesBackendUrl_02 = () => {
-        const currentURL_02 = window.location.href;
-        if (currentURL_02.includes('github.dev') || currentURL_02.includes('app.github.dev')) {
-            return currentURL_02.replace('-3000.', '-8001.').replace(/\/$/, '');
-        }
-        return 'http://localhost:8000';
-    };
 
-    const BASE_URL2 = getCodespacesBackendUrl_02();
+    const BASE_URL2 = `${import.meta.env.VITE_API_URL}`;
+
     const API_URL2 = BASE_URL2 + '/users3.php';
 
     // Fetch users function

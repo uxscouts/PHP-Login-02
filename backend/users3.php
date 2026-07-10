@@ -39,7 +39,7 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 
     // Use FETCHALL to get up to 10 users as an array
-    $stmt = $pdo->prepare("SELECT * FROM `users` LIMIT 10");
+    $stmt = $pdo->prepare("SELECT * FROM `users` LIMIT 30");
     $stmt->execute();
     $userData = $stmt->fetchAll(); 
 
