@@ -65,7 +65,7 @@ docker compose exec mysql mysql -u dev_user -p
 (this works!!!)
 
 // Force to show database INSIDE container!! - Not native Codespaces MySQL
-docker-compose exec mysql mysql -u dev_user -pdev_password my_database -e "SHOW TABLES;"
+docker-compose exec mysql mysql -u dev_user -p dev_password my_database -e "SHOW TABLES;"
 
 ---------------------------
 
