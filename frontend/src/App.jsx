@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+// 1. Import NavLink from react-router-dom as RRNavLink to avoid naming conflicts with Reactstrap
+import { BrowserRouter as Router, Routes, Route, NavLink as RRNavLink } from "react-router-dom";
 import Home from "./components/Home";
 import ProductsList from "./components/ProductsList";
 import Users_new from "./components/Users_new";
@@ -19,44 +20,73 @@ import {
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  
+  // 2. Helper function to close the mobile menu automatically when a link is clicked
+  const closeMenu = () => {
+    if (isOpen) setIsOpen(false);
+  };
 
   return (
     <Router>
-      {/* Added light/expand props for clean styling and responsiveness */}
       <Navbar color="light" light expand="md">
-        <NavbarBrand tag={Link} to="/">MyApp</NavbarBrand>
+        <NavbarBrand tag={RRNavLink} to="/" onClick={closeMenu}>MyApp</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         
-        {/* Your Nav must go INSIDE the Collapse component so it hides on mobile */}
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ms-auto" navbar>
             <NavItem>
-              {/* This replaces the nested <a> tags with one single, styled link */}
-              <NavLink tag={Link} to="/">
+              {/* 3. Pass RRNavLink as the tag, and add onClick={closeMenu} */}
+              <NavLink 
+                tag={RRNavLink} 
+                to="/" 
+                onClick={closeMenu}
+                // React Router automatically injects an `isActive` boolean
+                className={({ isActive }) => isActive ? "active fw-bold" : ""}
+              >
                 Home
               </NavLink>
             </NavItem>
 
             <NavItem>
-              <NavLink tag={Link} to="/products">
+              <NavLink 
+                tag={RRNavLink} 
+                to="/products" 
+                onClick={closeMenu}
+                className={({ isActive }) => isActive ? "active fw-bold" : ""}
+              >
                 Products
               </NavLink>
             </NavItem>
 
             <NavItem>
-              <NavLink tag={Link} to="/users3">
+              <NavLink 
+                tag={RRNavLink} 
+                to="/users3" 
+                onClick={closeMenu}
+                className={({ isActive }) => isActive ? "active fw-bold" : ""}
+              >
                 Users3
               </NavLink>
             </NavItem>
 
             <NavItem>
-              <NavLink tag={Link} to="/users_new">
+              <NavLink 
+                tag={RRNavLink} 
+                to="/users_new" 
+                onClick={closeMenu}
+                className={({ isActive }) => isActive ? "active fw-bold" : ""}
+              >
                 Users-New
               </NavLink>
             </NavItem>
 
             <NavItem>
-              <NavLink tag={Link} to="/users3_2">
+              <NavLink 
+                tag={RRNavLink} 
+                to="/users3_2" 
+                onClick={closeMenu}
+                className={({ isActive }) => isActive ? "active fw-bold" : ""}
+              >
                 Users3_2
               </NavLink>
             </NavItem>
