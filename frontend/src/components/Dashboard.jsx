@@ -12,13 +12,6 @@ function Dashboard() {
       <meta name="author" content="" />
       <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico" />
       <title>Dashboard Template for Bootstrap</title>
-      <link
-        rel="canonical"
-        href="https://getbootstrap.com/docs/4.0/examples/dashboard/"
-      />
-      {/* Bootstrap core CSS */}
-      <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
-      {/* Custom styles for this template */}
       <link href="dashboard.css" rel="stylesheet" />
       <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
         <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
