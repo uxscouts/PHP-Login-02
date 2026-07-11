@@ -5,6 +5,7 @@ import ProductsList from './components/ProductsList';
 import Users_new from './components/Users_new';
 import Users3 from './components/Users3';
 import Users3_2 from './components/Users3_2';
+import Dashboard from './components/Dashboard';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Link to="/users3" style={{ marginRight: '10px' }}>Users3</Link>
         <Link to="/users_new" style={{ marginRight: '10px' }}>Users-New</Link>
         <Link to="/users3_2" style={{ marginRight: '10px' }}>Users3_2</Link>
+        <Link to="/dashboard" style={{ marginRight: '10px' }}>Dashboard</Link>
       </nav>
 
       <div style={{ padding: '20px' }}>
@@ -26,6 +28,7 @@ export default function App() {
           <Route path="/users3" element={<Users3 />} />
           <Route path="/users_new" element={<Users_new />} />
           <Route path="/users3_2" element={<Users3_2 />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </Router>
