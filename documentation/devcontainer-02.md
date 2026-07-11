@@ -1,5 +1,5 @@
 {
-  "name": "PHP-LOGIN-02",
+  "name": "RPMS-07",
   "hostRequirements": {
     "cpus": 8,
     "memory": "16gb"
@@ -16,6 +16,24 @@
       "version": "lts"
     }
   },
+  "forwardPorts": [
+    3000,
+    8001,
+    3306
+  ],
+  "portsAttributes": {
+    "3000": {
+      "label": "React Frontend"
+    },
+    "3306": {
+      "label": "MySQL Database",
+      "onAutoForward": "ignore"
+    },
+    "8001": {
+      "label": "PHP Backend",
+      "onAutoForward": "notify"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -23,12 +41,11 @@
         "bmewburn.vscode-intelephense-client",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "cweijan.vscode-database-client2" 
+        "cweijan.vscode-database-client2"
       ]
     }
   },
   "remoteEnv": {
     "GITHUB_CODESPACES": "${localEnv:CODESPACES}"
-  },
-  "postStartCommand": "git config --global --add safe.directory /workspace"
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "PHP-LOGIN-02",
+  "name": "RPMS-07",
   "hostRequirements": {
     "cpus": 8,
     "memory": "16gb"
@@ -14,6 +14,22 @@
     },
     "ghcr.io/devcontainers/features/node:1": {
       "version": "lts"
+    }
+  },
+  "forwardPorts": [],
+  "portsAttributes": {
+    "5173": {
+      "label": "React Frontend (Vite)",
+      "onAutoForward": "openPreview"
+    },
+    "8000": {
+      "label": "PHP Backend",
+      "onAutoForward": "notify",
+      "visibility": "public"
+    },
+    "3306": {
+      "label": "MySQL Database",
+      "onAutoForward": "ignore"
     }
   },
   "customizations": {

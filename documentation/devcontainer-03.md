@@ -1,5 +1,5 @@
 {
-  "name": "PHP-LOGIN-02",
+  "name": "RPMS-07",
   "hostRequirements": {
     "cpus": 8,
     "memory": "16gb"
